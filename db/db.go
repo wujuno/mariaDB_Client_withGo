@@ -3,10 +3,24 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func Init() (*sql.DB, error) {
-	dsn := "root:antline1!@tcp(localhost:3306)/market_db"
+	err := godotenv.Load()
+	if err != nil {
+		return nil, err
+	}
+
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+
+	dsn := user + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbName
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {

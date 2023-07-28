@@ -8,6 +8,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+
 func main() {
 	fmt.Println("DB에 연결합니다.")
 	db, err := db.Init()

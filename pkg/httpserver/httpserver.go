@@ -14,7 +14,7 @@ func StartHTTPServer() {
 		fmt.Fprintf(w, "Learning REST API with mariaDB and go")
 	}).Methods(http.MethodGet)
 
-	r.HandleFunc("idol", idolListHandler).Methods(http.MethodGet)
+	r.HandleFunc("/idol", idolListHandler).Methods(http.MethodGet)
 
 	handler := cors.Default().Handler(r)
 	http.ListenAndServe(":8080",handler)

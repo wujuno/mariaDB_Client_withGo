@@ -1,11 +1,25 @@
 package httpserver
 
-import "net/http"
+import (
+	"encoding/json"
+	"mariadbClient/db"
+	"net/http"
+)
 
 
 
 func idolListHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	//db에서 GET
-	//JSON 형식의 데이터 응답
+	
+	members, err := db.SelectIdolInfo()
+	if err != nil {
+		http.Error(w, "Failed to fetch idol information", http.StatusInternalServerError )
+		return
+	}
+
+	err = json.NewEncoder(w).Encode(members)
+	if err != nil {
+		http.Error(w, "Failed to encode JSON response", http.StatusInternalServerError)
+		return
+	}
 }

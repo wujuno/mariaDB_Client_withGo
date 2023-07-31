@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+
 func Init() (*sql.DB, error) {
 	err := godotenv.Load()
 	if err != nil {
@@ -31,6 +32,7 @@ func Init() (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+	
 	fmt.Println("MariaDB에 연결되었습니다.")
 	return db, nil
 }
